@@ -1,0 +1,164 @@
+
+Ans 1
+
+public  int[] twoSum(int[] nums, int target) {
+    for (int i = 0; i < nums.length; i++) {
+        for (int j = i + 1; j < nums.length; j++) {
+            if (nums[j] == target - nums[i]) {
+                return new int[] { i, j };
+            }
+        }
+    }
+    throw new IllegalArgumentException("No two sum solution");
+}
+
+Time complexity: O(n2)
+Space complexity: O(1)
+
+
+Ans 2
+
+int[] nums = [...]; // Input array
+int val = ...; // Value to remove
+int[] expectedNums = [...]; // The expected answer with correct length.
+                            // It is sorted with no values equaling val.
+
+int k = removeElement(nums, val); // Calls your implementation
+
+assert k == expectedNums.length;
+sort(nums, 0, k); // Sort the first k elements of nums
+for (int i = 0; i < actualLength; i++) {
+    assert nums[i] == expectedNums[i];
+}
+
+
+Ans 3
+
+
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        if nums==[]:
+            return 0
+        l = len(nums)
+        i= 0
+        j= l-1
+        if target > nums[j]:
+            return l
+        elif target<nums[i]:
+            return 0
+        while (i<=j):
+    
+            mid = i + ((j-i)//2)        
+            if nums[mid] == target:
+                return mid
+            elif target < nums[mid]:
+                j=mid-1
+            elif target > nums[mid]:
+                i=mid+1
+        return i
+
+
+Ans4 
+
+public int[] plusOne(int[] digits) {
+        
+    int n = digits.length;
+    for(int i=n-1; i>=0; i--) {
+        if(digits[i] < 9) {
+            digits[i]++;
+            return digits;
+        }
+        
+        digits[i] = 0;
+    }
+    
+    int[] newNumber = new int [n+1];
+    newNumber[0] = 1;
+    
+    return newNumber;
+}
+
+
+Ans5
+
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+
+        int i = m - 1;
+        int j = n - 1;
+        int k = m + n - 1;
+
+        while (k >= 0) {
+
+            if (i >= 0 && j >= 0) {
+
+                if (nums1[i] >= nums2[j]) {
+                    nums1[k--] = nums1[i--];
+                } else {
+                    nums1[k--] = nums2[j--];
+                }
+            } else if (j >= 0) {
+                nums1[k--] = nums2[j--];
+
+            } else {
+                break;
+            }
+
+        }
+    }
+}
+
+
+Ans6
+
+public static boolean repeat(int[] arr){
+
+    for(int i=0; i<arr.length-1; i++) {
+        for(int j= i+1; j<arr.length; j++){
+           if(arr[i] == arr[j]) {
+            return true;
+           }
+        }
+    }
+    return false;
+}
+
+public static boolean repeat(int[] arr){
+   for(int i=0; i<arr.length-1; i++) {
+       
+           if(arr[i] == arr[i+1]) {
+            return true;
+           }
+        
+    }
+    return false;
+}
+}
+
+
+7
+
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        count = 0
+        for item in nums:
+            if item == 0:
+                nums.remove(item)
+                count += 1                
+        for i in range(0,count):
+            nums.append(0)
+
+8
+
+class Solution:
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        N, dupe = len(nums), 0
+        seen, sumN = [0] * (N+1), N * (N+1) // 2
+        for num in nums:
+            sumN -= num
+            if seen[num]: dupe = num
+            seen[num] += 1
+        return [dupe, sumN + dupe]
